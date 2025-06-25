@@ -62,3 +62,47 @@ SELECT * FROM enroll ;
 > 🐧 On Linux, sometimes after running commands like `\d` or `\l` in `psql`, the output enters a *pager* mode (usually using `less`), where pressing `Enter` scrolls line by line and `Esc` doesn’t work.
 >
 > To exit this mode, simply press **`q`** (for *quit*).
+
+## INSERT VALUES
+
+#### student
+
+```sql
+INSERT INTO student(fname, lname)
+VALUES
+('Ira','Benin'),
+('Florence','Light'),
+('Valine','Rose'),
+('Elina','Scotch'),
+('Sofia','Valgaire')
+;
+```
+>[!WARNING]
+> In VALUES for multiple vlaues , dont use parent common brackets
+
+### Course
+
+```sql
+INSERT INTO course(c_name, fees)
+VALUES
+('Bioinformatics',750.00),
+('Neurotechnology',910.00),
+('Biomimetics',430.00),
+('Genomics',690.00),
+('Bioprinting',570.00)
+;
+```
+### Enroll
+
+```sql
+INSERT INTO enroll(s_id,c_id)
+VALUES
+(1,2), -- Ira in Neurotechnology
+(2,3), -- Florence in Biometics
+(2,4), -- Florence in Genomics
+(3,5), -- Valine in Bioprinting
+(4,1), -- Elina in Neurotechnology
+(4,3), -- Elina in Biometics
+(5,3) -- Sofia in Biometics
+;
+```
