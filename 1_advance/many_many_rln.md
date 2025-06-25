@@ -65,7 +65,7 @@ SELECT * FROM enroll ;
 
 ## INSERT VALUES
 
-#### student
+#### Student
 
 ```sql
 INSERT INTO student(fname, lname)
@@ -103,6 +103,56 @@ VALUES
 (3,5), -- Valine in Bioprinting
 (4,1), -- Elina in Neurotechnology
 (4,3), -- Elina in Biometics
-(5,3) -- Sofia in Biometics
+(5,3)  -- Sofia in Biometics
 ;
 ```
+## Queries
+
+### Join
+
+```sql
+SELECT
+s.s_id,
+CONCAT_WS(' ',s.fname,s.lname),
+c.c_name,
+c.fees,
+e.e_id 
+FROM enroll e
+JOIN student s ON e.s_id = s.s_id
+JOIN course c ON e.c_id = c.c_id
+ORDER BY s.s_id
+;
+```
+### GroupBy
+
+```sql
+SELECT
+s.s_id,
+CONCAT_WS(' ',s.fname,s.lname),
+COUNT(c.c_id) AS courses,
+SUM(c.fees) AS total_fees
+FROM enroll e
+JOIN student s ON e.s_id = s.s_id
+JOIN course c ON e.c_id = c.c_id
+GROUP BY s.s_id
+ORDER BY s.s_id
+;
+```
+### Having with GroupBy
+
+```sql
+SELECT
+s.s_id,
+CONCAT_WS(' ',s.fname,s.lname),
+COUNT(c.c_id) AS courses,
+SUM(c.fees) AS total_fees
+FROM enroll e
+JOIN student s ON e.s_id = s.s_id
+JOIN course c ON e.c_id = c.c_id
+GROUP BY s.s_id
+HAVING COUNT(c.c_id) > 1
+ORDER BY s.s_id
+;
+```
+>[!NOTE]
+>From here onwards you can take muliple scenarios and practice them 
