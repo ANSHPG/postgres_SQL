@@ -4,11 +4,14 @@
 CREATE DATABASE dojo;
 \c dojo
 ```
-### windows
+
+## Command: Clear Screen
+
+### Windows
 ```sql
 \! cls
 ```
-### linux
+### Linux
 ```sql
 ctrl + l
 ```
@@ -65,7 +68,7 @@ SELECT * FROM enroll ;
 
 ## INSERT VALUES
 
-#### Student
+### Student
 
 ```sql
 INSERT INTO student(fname, lname)
