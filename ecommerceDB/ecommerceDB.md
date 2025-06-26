@@ -61,9 +61,96 @@ CREATE TABLE orderItems(
 );
 ```
 ```sql
-\d bill
+\d orderItems
 ```
 
 >[!NOTE]
 > ```sql \d```
 > To check all the tables have been initiated or not
+
+## Entry: table
+
+### Customer
+
+```sql
+INSERT INTO customer(
+    fname,
+    lname
+)
+VALUES
+('Ira','Benin'),
+('Florence','Light'),
+('Valine','Rose'),
+('Elina','Scotch'),
+('Sofia','Valgaire')
+;
+```
+```sql
+SELECT * FROM customer;
+```
+
+### Customer
+
+```sql
+INSERT INTO product(
+    p_name,
+    mrp
+)
+VALUES
+('CRUCIAL_SSD_240GB',1780),
+('MSI_MOTHERBOARD',12520),
+('SAMSUNG_DDR5_32GB_RAM',12660),
+('INTEL_I7_14_GEN',41000),
+('ASUS_SMPS_1000W',20219),
+('LG_27_4K_MONITOR',48499),
+('TP_LINK_WIFI_6_ROUTER',2999)
+;
+```
+```sql
+SELECT * FROM product;
+```
+>[!NOTE]
+>We know it would have been better to add column for quantity, but for simplification we have decided to ommit that :)
+
+### Bill
+```sql
+INSERT INTO bill(c_id)
+VALUES
+(1),(3),(5),(2),(5),(4),(3);
+```
+```sql
+SELECT * FROM bill;
+```
+### OrderItems
+```sql
+INSERT INTO orderItems(
+    b_id,
+    p_id,
+    quantity
+)
+VALUES
+(1,1,2),
+(1,3,3),
+(2,6,1),
+(3,7,4),
+(3,5,2),
+(3,1,2),
+(4,3,2),
+(5,6,2),
+(6,2,1),
+(6,4,2),
+(7,2,1)
+;
+```
+> [!WARNING]
+> In case there is default serial input in column, then follow this code:
+> ```sql 
+>UPDATE orderItems
+>SET i_id = i_id - 11
+>WHERE i_id > 11 
+>; 
+>```
+
+```sql
+SELECT * FROM orderItems;
+```
