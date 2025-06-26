@@ -16,6 +16,18 @@ CREATE TABLE customer(
     c_date DATE DEFAULT CURRENT_DATE
 );
 ```
-```js example-good
+```sql
 \d customer
+```
+### 
+```sql
+CREATE TABLE product(
+    p_id SERIAL PRIMARY KEY,
+    p_name VARCHAR(150) NOT NULL,
+    mrp DECIMAL(10,2) NOT NULL,
+    p_date DATE DEFAULT CURRENT_DATE
+);
+```
+```sql 
+\d product
 ```
