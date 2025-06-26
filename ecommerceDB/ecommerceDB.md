@@ -16,6 +16,6 @@ CREATE TABLE customer(
     c_date DATE DEFAULT CURRENT_DATE
 );
 ```
-```sql example-good
+```js example-good
 \d customer
 ```
