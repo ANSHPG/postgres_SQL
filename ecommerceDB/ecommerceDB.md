@@ -19,7 +19,7 @@ CREATE TABLE customer(
 ```sql
 \d customer
 ```
-### 
+### Product
 ```sql
 CREATE TABLE product(
     p_id SERIAL PRIMARY KEY,
