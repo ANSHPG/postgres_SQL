@@ -154,3 +154,81 @@ VALUES
 ```sql
 SELECT * FROM orderItems;
 ```
+
+## Queries
+
+### Join
+
+```sql
+SELECT 
+b.b_id,
+b.c_id,
+p.p_name,
+p.mrp
+FROM orderItems i
+JOIN bill b ON i.b_id = b.b_id
+JOIN product p ON i.p_id = p.p_id
+WHERE b.b_id = 3
+;
+```
+
+### Join: all tables
+
+```sql
+SELECT 
+c.c_id AS customer_id,
+CONCAT_WS(' ',c.fname, c.lname) AS customer,
+p.p_name AS product,
+p.mrp AS mrp,
+b.b_id AS bill_id,
+o.i_Id AS item_id
+FROM orderItems o
+INNER JOIN  product p ON o.p_id = p.p_id
+INNER JOIN  bill b ON o.b_id = b.b_id
+INNER JOIN  customer c ON b.c_id = c.c_id
+;
+```
+
+### GROUP BY
+
+#### Filter: customers spent more than avg.
+```sql
+SELECT 
+c.c_id AS customer_id,
+CONCAT_WS(' ',c.fname, c.lname) AS customer,
+COUNT(o.i_id) AS total_orders,
+SUM(p.mrp) AS amount_spent
+FROM orderItems o
+INNER JOIN  product p ON o.p_id = p.p_id
+INNER JOIN  bill b ON o.b_id = b.b_id
+INNER JOIN  customer c ON b.c_id = c.c_id
+GROUP BY c.c_id, customer
+HAVING SUM(p.mrp) > (
+SELECT AVG(spent) FROM(
+SELECT AVG(p.mrp) AS spent
+FROM orderItems o
+INNER JOIN  product p ON o.p_id = p.p_id
+INNER JOIN  bill b ON o.b_id = b.b_id
+INNER JOIN  customer c ON b.c_id = c.c_id
+GROUP BY c.c_id)
+)
+ORDER BY customer_id
+;
+```
+
+#### Filter: Orders frequency & Sales
+```sql
+SELECT 
+p.P_id AS product_id,
+p.p_name AS product,
+p.mrp AS mrp,
+COUNT(o.i_id) AS orders,
+SUM(p.mrp) AS sales
+FROM orderItems o
+INNER JOIN  product p ON o.p_id = p.p_id
+INNER JOIN  bill b ON o.b_id = b.b_id
+INNER JOIN  customer c ON b.c_id = c.c_id
+GROUP BY p.p_id, p.p_name
+ORDER BY p.p_id
+;
+```
